@@ -13,8 +13,7 @@ def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
     try:
         if symbol == 'BTCUSDT':
             limited_qty =  "{:.3f}".format(quantity)
-        else:
-            limited_qty = "{:.3f}".format(quantity)
+
         order = client.futures_create_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
         client.futures_change_leverage(symbol=symbol, leverage=10)
         
