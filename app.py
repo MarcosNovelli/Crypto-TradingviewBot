@@ -12,7 +12,7 @@ client = Client(config.API_KEY, config.API_SECRET, tld='com')
 def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
     try:
         if symbol == 'MATICUSDT':
-            limited_qty =  "{:.3f}".format(quantity)
+            limited_qty =  int(quantity)
         else:
             limited_qty =  "{:.2f}".format(quantity)
 
