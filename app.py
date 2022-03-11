@@ -11,12 +11,17 @@ client = Client(config.API_KEY, config.API_SECRET, tld='com')
 
 def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
     try:
-        if symbol == 'MATICUSDT':
+        if symbol == 'MATICUSDTPERP':
             limited_qty =  int(quantity)
-        elif symbol == 'BTCUSDT':
+            symbol = 'MATICUSDT'
+        
+        elif symbol == 'BTCUSDTPERP':
             limited_qty = "{:.3f}".format(quantity)
-        else:
+            symbol = 'BTCUSDT'
+        
+        elif symbol == 'ETHUSDTPERP':
             limited_qty =  "{:.2f}".format(quantity)
+            symbol = 'ETHUSDT'
 
         order = client.futures_create_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
         client.futures_change_leverage(symbol=symbol, leverage=10)
