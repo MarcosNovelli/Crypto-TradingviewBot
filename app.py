@@ -22,6 +22,10 @@ def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
         elif symbol == 'ETHUSDTPERP':
             limited_qty =  "{:.2f}".format(quantity)
             symbol = 'ETHUSDT'
+        
+        elif symbol == 'XRPUSDTPERP':
+            symbol = 'XRPUSDT'
+            limited_qty = quantity
 
         #order = client.create_test_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
         order = client.futures_create_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
