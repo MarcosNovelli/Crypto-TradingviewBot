@@ -29,7 +29,7 @@ def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
 
         #order = client.create_test_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
         order = client.futures_create_order(symbol=symbol, side=side, type=order_type, quantity=limited_qty)
-        client.futures_change_leverage(symbol=symbol, leverage=10)
+        client.futures_change_leverage(symbol=symbol, leverage=20)
         
         print(f"sending order {order_type} - {side} {limited_qty} {symbol}")
     except Exception as e:
