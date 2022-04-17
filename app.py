@@ -96,8 +96,8 @@ def add_to_excel(data:List):
     try:
         wb = load_workbook("Trades.xlsx")
         ws = wb[data[0]]
-        info = ['ETHUSDT', 'SELL', 'Opening Order', 3065.02, 0.005, 0.0, 0.00613004]
-        ws.append(info)
+        print(data)
+        ws.append(data)
         wb.save("Trades.xlsx")
         wb.close()
     except Exception as e:
@@ -126,7 +126,6 @@ def webhook():
     order_response = order(side, quantity , ticker)
     
     trade_data:List = return_trade_data(clean_perp(ticker), clean_quantity(quantity))
-    print(trade_data)
     add_to_excel(trade_data)
 
     if order_response:
