@@ -25,9 +25,9 @@ def clean_quantity(quantity):
     if quantity >= 1:
         quantity =  int(quantity)
     elif quantity <= 0.01:
-        quantity = "{:.3f}".format(quantity)
+        quantity = float("{:.3f}".format(quantity))
     elif quantity <= 0.1:
-        quantity = "{:.2f}".format(quantity)
+        quantity = float("{:.2f}".format(quantity))
     return quantity
 
 def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
