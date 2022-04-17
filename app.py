@@ -125,6 +125,7 @@ def webhook():
     order_response = order(side, quantity , ticker)
     
     trade_data:List = return_trade_data(clean_perp(ticker), clean_quantity(quantity))
+    print(trade_data)
     add_to_excel(trade_data)
 
     if order_response:
