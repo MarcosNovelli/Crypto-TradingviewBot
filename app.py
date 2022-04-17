@@ -95,8 +95,8 @@ def add_to_excel(data:List):
     """
     try:
         wb = load_workbook("Trades.xlsx")
-        ws = wb[data[0]]
-        print(data)
+        ws = wb.active
+        print(ws['A1'].value)
         ws.append(data)
         wb.save("Trades.xlsx")
         wb.close()
