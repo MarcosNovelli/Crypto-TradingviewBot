@@ -82,7 +82,7 @@ def return_trade_data(symbol:str, quantity) -> List[dict]:
             print("An exception ocurred editing the trade amounts - {}".format(e))
                 
     except Exception as e:
-        print("an exception occured in adding the trade to excel - {}".format(e))
+        print("an exception occured in retrieving trade data - {}".format(e))
     
 
     data = [symbol, side, type, price, traded_quantity, pnl, commission]
@@ -93,10 +93,13 @@ def add_to_excel(data:List):
     Requiere: Data compuesta por symbol, side, type, price,
         quantity, pnl and commission
     """
-    wb = load_workbook('Trades.xlsx')
-    ws = wb[data[0]]
-    ws.append(data)
-    wb.save('Trades.xlsx')
+    try:
+        wb = load_workbook('Trades.xlsx')
+        ws = wb[data[0]]
+        ws.append(data)
+        wb.save('Trades.xlsx')
+    except Exception as e:
+        print("An exception has occured in adding the trade to excel - {}".format(e))
 
 @app.route("/")
 def welcome():
