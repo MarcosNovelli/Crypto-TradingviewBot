@@ -94,10 +94,10 @@ def add_to_excel(data:List):
         quantity, pnl and commission
     """
     try:
-        wb = load_workbook('Trades.xlsx')
+        wb = load_workbook("C:\Users\marco\Desktop\Trades.xlsx")
         ws = wb[data[0]]
         ws.append(data)
-        wb.save('Trades.xlsx')
+        wb.save("C:\Users\marco\Desktop\Trades.xlsx")
         wb.close()
     except Exception as e:
         print("An exception has occured in adding the trade to excel - {}".format(e))
