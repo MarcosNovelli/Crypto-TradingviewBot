@@ -98,7 +98,7 @@ def add_to_excel(data:List):
         ws = wb[data[0]]
         ws.append(data)
         wb.save('Trades.xlsx')
-        wb.close('Trades.xlsx')
+        wb.close()
     except Exception as e:
         print("An exception has occured in adding the trade to excel - {}".format(e))
 
