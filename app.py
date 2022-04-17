@@ -97,6 +97,7 @@ def add_to_excel(data:List):
         wb = load_workbook("Trades.xlsx")
         ws = wb.active
         ws.append(['THIS IS A1', 'THIS IS A2'])
+        print(ws['A1'].value)
         wb.save("Trades.xlsx")
         wb.close()
     except Exception as e:
