@@ -96,7 +96,8 @@ def add_to_excel(data:List):
     try:
         wb = load_workbook("Trades.xlsx")
         ws = wb[data[0]]
-        ws.append(data)
+        info = ['ETHUSDT', 'SELL', 'Opening Order', 3065.02, 0.005, 0.0, 0.00613004]
+        ws.append(info)
         wb.save("Trades.xlsx")
         wb.close()
     except Exception as e:
