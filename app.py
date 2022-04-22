@@ -44,64 +44,7 @@ def order(side, quantity, symbol, order_type=ORDER_TYPE_MARKET):
         print("an exception occured - {}".format(e))
         return False
 
-    return order
-
-def return_trade_data(symbol:str, quantity) -> List[dict]:
-    '''
-    Requiere: A symbol to look up and quantity that should be traded
-    Devuelve: Last trade taken on symbol
-    '''
-    try:
-        trade = client.futures_account_trades(symbol=symbol, limit=1)
-        symbol:str = trade[0]['symbol']
-        side:str = trade[0]['side']
-        traded_quantity:float = float(trade[0]['qty'])
-        price:float = float(trade[0]['price'])
-        pnl:float = float(trade[0]['realizedPnl'])
-        commission:float = float(trade[0]['commission'])
-
-        
-        if pnl == 0:
-            type = "Opening Order"
-        else:
-            type = "Closing Order"
-
-        
-        try:
-            n = 2
-
-            while float(traded_quantity) < quantity:
-                trade = client.futures_account_trades(symbol=symbol, limit=n)
-
-                traded_quantity += float(trade[0]['qty'])
-                pnl += float(trade[0]['realizedPnl'])
-                commission += float(trade[0]['commission'])
-                n += 1
-
-        except Exception as e:
-            print("An exception ocurred editing the trade amounts - {}".format(e))
-                
-    except Exception as e:
-        print("an exception occured in retrieving trade data - {}".format(e))
-    
-
-    data = [symbol, side, type, price, traded_quantity, pnl, commission]
-    return data
-
-def add_to_excel(data:List):
-    """
-    Requiere: Data compuesta por symbol, side, type, price,
-        quantity, pnl and commission
-    """
-    try:
-        wb = load_workbook("Trades.xlsx")
-        ws = wb.active
-        ws.append(['THIS IS A1', 'THIS IS A2'])
-        print(ws['A1'].value)
-        wb.save("Trades.xlsx")
-        wb.close()
-    except Exception as e:
-        print("An exception has occured in adding the trade to excel - {}".format(e))
+    return order  
 
 @app.route("/")
 def welcome():
@@ -124,9 +67,6 @@ def webhook():
     ticker = data['ticker']
 
     order_response = order(side, quantity , ticker)
-    
-    trade_data:List = return_trade_data(clean_perp(ticker), clean_quantity(quantity))
-    add_to_excel(trade_data)
 
     if order_response:
         return {
