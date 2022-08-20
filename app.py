@@ -2,8 +2,6 @@ import json, config
 from flask import Flask, render_template, request, jsonify, render_template
 from binance.client import Client
 from binance.enums import *
-from typing import List
-from openpyxl import Workbook, load_workbook
 
 app = Flask(__name__)
 
